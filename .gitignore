@@ -48,3 +48,5 @@ bin/clang-format.exe
 
 node_modules
 tools/lottiecap/filmstrip.png
+
+_esy
