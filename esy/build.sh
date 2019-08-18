@@ -11,7 +11,7 @@ python tools/git-sync-deps
 ln -s third_party/externals/gyp tools/gyp
 if [[ $OS == "windows" ]]
 then
-    bin/gn gen $cur__target_dir/out/Shared --args='is_debug=false is_component_build=true'
+    bin/gn gen $cur__target_dir/out/Shared --args='is_debug=false is_component_build=true' || exit -1
     ninja.exe -C $cur__target_dir/out/Shared
     esy/gendef.exe - $cur__target_dir/out/Shared/skia.dll > $cur__target_dir/out/Shared/skia.def
     x86_64-W64-mingw32-dlltool.exe -D $cur__target_dir/out/Shared/skia.dll -d $cur__target_dir/out/Shared/skia.def -A -l $cur__target_dir/out/Shared/libskia.a

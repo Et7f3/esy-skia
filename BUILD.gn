@@ -540,15 +540,18 @@ optional("gpu") {
     libs += [ "EGL" ]
   } else if (is_linux && skia_use_x11) {
     sources += [ "src/gpu/gl/glx/GrGLMakeNativeInterface_glx.cpp" ]
-    # GPU is not linked in, but loaded at runtime
-    libs += [ "dl" ]
+    libs += [
+      "GL",
+      "GLU",
+      "dl",
+    ]
   } else if (is_mac) {
     sources += [ "src/gpu/gl/mac/GrGLMakeNativeInterface_mac.cpp" ]
   } else if (is_ios) {
     sources += [ "src/gpu/gl/iOS/GrGLMakeNativeInterface_iOS.cpp" ]
   } else if (is_win && !is_winrt) {
     sources += [ "src/gpu/gl/win/GrGLMakeNativeInterface_win.cpp" ]
-    # GPU is not linked in, but loaded at runtime
+    libs += [ "OpenGL32.lib" ]
   } else {
     sources += [ "src/gpu/gl/GrGLMakeNativeInterface_none.cpp" ]
   }
@@ -1025,6 +1028,65 @@ component("skia") {
   if (skia_include_multiframe_procs) {
     sources += [ "tools/SkSharingProc.cpp" ]
   }
+}
+
+
+config("SkiaSharp_public") {
+  include_dirs = [ ]
+  defines = [ "SKIA_C_DLL" ]
+}
+
+skiasharp_build("SkiaSharp") {
+  public_configs = [ ":skia_public", ":SkiaSharp_public" ]
+  configs += skia_library_configs + [ ":SkiaSharp_public" ]
+
+  deps = [
+    ":skia",
+  ]
+
+  # clear the sources and add explicitly
+  set_sources_assignment_filter([])
+  sources = [
+    "src/xamarin/sk_compatpaint.cpp",
+    "src/xamarin/sk_manageddrawable.cpp",
+    "src/xamarin/sk_managedstream.cpp",
+    "src/xamarin/sk_xamarin.cpp",
+    "src/xamarin/SkiaKeeper.c",
+    "src/xamarin/SkCompatPaint.cpp",
+    "src/xamarin/SkManagedDrawable.cpp",
+    "src/xamarin/SkManagedStream.cpp",
+    "src/xamarin/WinRTCompat.cpp",
+    "src/core/SkPathRef.cpp",
+    "src/core/SkString.cpp",
+    "src/core/SkMatrix.cpp",
+    "src/core/SkBuffer.cpp",
+    "src/core/SkUtils.cpp",
+    "src/core/SkMath.cpp",
+    "src/c/sk_region.cpp",
+    "src/c/sk_rrect.cpp",
+    "src/c/sk_shader.cpp",
+    "src/c/sk_stream.cpp",
+    "src/c/sk_string.cpp",
+    "src/c/sk_surface.cpp",
+    "src/c/sk_svg.cpp",
+    "src/c/sk_colortable.cpp",
+    "src/c/sk_data.cpp",
+    "src/c/sk_document.cpp",
+    "src/c/sk_drawable.cpp",
+    "src/c/sk_general.cpp",
+    "src/c/sk_image.cpp",
+    "src/c/sk_imagefilter.cpp",
+    "src/c/sk_mask.cpp",
+    "src/c/sk_maskfilter.cpp",
+    "src/c/sk_matrix.cpp",
+    "src/c/sk_paint.cpp",
+    "src/c/sk_path.cpp",
+    "src/c/sk_patheffect.cpp",
+    "src/c/sk_picture.cpp",
+    "src/c/sk_pixmap.cpp",
+  ]
+
+  libs = []
 }
 
 # DebugCanvas used in experimental/wasm-skp-debugger
