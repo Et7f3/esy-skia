@@ -13,6 +13,7 @@ if [[ $OS == "windows" ]]
 then
     bin/gn gen $cur__target_dir/out/Shared --args='is_debug=false is_component_build=true' || exit -1
     ninja.exe -C $cur__target_dir/out/Shared
+    mv $cur__target_dir/out/Shared/libskia.dll $cur__target_dir/out/Shared/skia.dll # TODO this might not be required once we merge upstream
     esy/gendef.exe - $cur__target_dir/out/Shared/skia.dll > $cur__target_dir/out/Shared/skia.def
     x86_64-W64-mingw32-dlltool.exe -D $cur__target_dir/out/Shared/skia.dll -d $cur__target_dir/out/Shared/skia.def -A -l $cur__target_dir/out/Shared/libskia.a
 else
