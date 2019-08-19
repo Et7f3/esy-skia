@@ -3,6 +3,7 @@
 OS=$1
 
 # Copy artifacts into output directories
+mkdir -p $cur__install/include/c
 cp -a $cur__root/include/c/. $cur__install/include/c/
 if [[ $OS == 'windows' ]]
 then
