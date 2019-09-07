@@ -1,6 +1,6 @@
 {
   "name": "esy-skia",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Mirror of skia repo, buildable with esy",
   "directories": {
     "doc": "docs",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manuhornung/esy-skia.git"
+    "url": "git+https://github.com/revery-ui/esy-skia.git"
   },
   "bugs": {
-    "url": "https://github.com/manuhornung/esy-skia/issues"
+    "url": "https://github.com/revery-ui/esy-skia/issues"
   },
   "homepage": "https://skia.org",
   "esy": {
