@@ -248,7 +248,7 @@ static inline SkImageInfo AsImageInfo(const sk_imageinfo_t* info) {
         info->height,
         (SkColorType)info->colorType,
         (SkAlphaType)info->alphaType,
-        sk_ref_sp(AsColorSpace(info->colorspace))); 
+        sk_ref_sp(AsColorSpace(info->colorspace)));
 }
 static inline sk_imageinfo_t ToImageInfo(const SkImageInfo info) {
     return {
