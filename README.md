@@ -1,5 +1,4 @@
-[![Build Status](https://dev.azure.com/manuhornung/manuhornung/_apis/build/status/manuhornung.esy-skia?branchName=master)](https://dev.azure.com/manuhornung/manuhornung/_build/latest?definitionId=1&branchName=master)
-
+[![Build Status](https://dev.azure.com/revery-ui/revery/_apis/build/status/revery-ui.esy-skia?branchName=master)](https://dev.azure.com/revery-ui/revery/_build/latest?definitionId=13&branchName=master)
 
 Skia is a complete 2D graphic library for drawing Text, Geometries, and Images.
 
