@@ -13,7 +13,8 @@ import("../third_party.gni")
 
 if (skia_use_system_freetype2) {
   system("freetype2") {
-    cflags = [ "-I=/usr/include/freetype2" ]
+    include_dirs = [ "/usr/include/freetype2" ]
+    cflags = [ "-I=/usr/include/freetype2" ] # This seems to be required for Tizen, but I didn't verify it
     libs = [ "freetype" ]
   }
 } else {
