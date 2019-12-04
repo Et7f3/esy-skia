@@ -6,7 +6,9 @@ if (!defined(is_skia_standalone)) {
   is_skia_standalone = false
 }
 
-is_skia_dev_build = is_skia_standalone && !is_official_build
+# esy-skia: turn off tools / dev build due to failure on Mac OSX
+# is_skia_dev_build = is_skia_standalone && !is_official_build
+is_skia_dev_build = false
 
 declare_args() {
   skia_android_serial = ""
