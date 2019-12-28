@@ -16,15 +16,15 @@ fi
 # Create pkg-config file skia.pc
 if [[ $OS == "darwin" ]]
 then
-    extraLibFlags=""
+    extraCFlags=""
     platformSpecificFlags="-framework CoreServices -framework CoreGraphics -framework CoreText -framework CoreFoundation"
 elif [[ $OS == "windows" ]]
 then
-    extraLibFlags="-std=c++1y"
+    extraCFlags="-std=c++1y"
     platformSpecificFlags="-luser32"
 else
     # TODO find out what is needed here
-    extraLibFlags=""
+    extraCFlags=""
     platformSpecificFlags=
 fi
 
@@ -34,8 +34,8 @@ includedir=$cur__install/include
 Name: skia
 Description: 2D graphics library
 Version: $cur__version
-Cflags: -I$cur__install -I\${includedir}/android -I\${includedir}/atlastext -I\${includedir}/c -I\${includedir}/codec -I\${includedir}/config -I\${includedir}/core -I\${includedir}/docs -I\${includedir}/effects -I\${includedir}/encode -I\${includedir}/gpu -I\${includedir}/pathops -I\${includedir}/ports -I\${includedir}/private -I\${includedir}/svg -I\${includedir}/third_party -I\${includedir}/utils
-Libs: -L$cur__lib $platformSpecificFlags -lskia -lstdc++ $extraLibFlags
+Cflags: -I$cur__install -I\${includedir}/android -I\${includedir}/atlastext -I\${includedir}/c -I\${includedir}/codec -I\${includedir}/config -I\${includedir}/core -I\${includedir}/docs -I\${includedir}/effects -I\${includedir}/encode -I\${includedir}/gpu -I\${includedir}/pathops -I\${includedir}/ports -I\${includedir}/private -I\${includedir}/svg -I\${includedir}/third_party -I\${includedir}/utils $extraCFlags
+Libs: -L$cur__lib $platformSpecificFlags -lskia -lstdc++
 EOF
 
 if [[ $OS != "windows" ]]
