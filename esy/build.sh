@@ -26,17 +26,21 @@ then
     x86_64-W64-mingw32-dlltool.exe -D $cur__target_dir/out/Shared/skia.dll -d $cur__target_dir/out/Shared/skia.def -A -l $cur__target_dir/out/Shared/libskia.a
 else
 
+    CC=clang
+    CXX=clang++
     if ! [ -x "$(command -v clang++)" ]; then
         echo "Manually activating llvm toolset 7.0..."
         source /opt/rh/llvm-toolset-7.0/enable
+        CC="clang --gcc-toolchain=/usr/lib/gcc/x86_64-redhat-linux/4.8.5 -stdlib=libstdc++"
+        CXX="clang++ --gcc-toolchain=/usr/lib/gcc/x86_64-redhat-linux/4.8.5 -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -std=c++11 -stdlib=libstdc++"
         echo "-- clang version:"
-        clang -v
+        $CC -v
         echo "-- clang++ version:"
-        clang++ -v
+	$CXX -v
     else
         echo "llvm toolset-7.0 does not need to be manually activated"
     fi
 
-    bin/gn gen $cur__target_dir/out/Static --script-executable="$PYTHON_BINARY" "--args=cc=\"clang\" cxx=\"clang++\" skia_use_system_libjpeg_turbo=true is_debug=false extra_cflags=[\"-I${ESY_LIBJPEG_TURBO_PREFIX}/include\"] extra_ldflags=[\"-L${ESY_LIBJPEG_TURBO_PREFIX}/lib\", \"-ljpeg\" ]" || exit -1
+    bin/gn gen $cur__target_dir/out/Static --script-executable="$PYTHON_BINARY" "--args=cc=\"$CC\" cxx=\"$CXX\" skia_use_system_libjpeg_turbo=true is_debug=false extra_cflags=[\"-I${ESY_LIBJPEG_TURBO_PREFIX}/include\"] extra_ldflags=[\"-L${ESY_LIBJPEG_TURBO_PREFIX}/lib\", \"-ljpeg\" ]" || exit -1
     ninja.exe -C $cur__target_dir/out/Static
 fi
