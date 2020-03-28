@@ -230,7 +230,8 @@ def git_sync_deps(deps_file_path, command_line_os_requests, verbose):
     list_of_arg_lists.append(
       (git, repo, commithash, relative_directory, verbose))
 
-  multithread(git_checkout_to_directory, list_of_arg_lists)
+  for args in list_of_arg_lists:
+      git_checkout_to_directory(*args)
 
 
 def multithread(function, list_of_arg_lists):
