@@ -11,7 +11,7 @@ Look for the first match in the format
     C:\\Program Files (x86)\\Microsoft Visual Studio\\${RELEASE}\\${VERSION}\\VC
 '''
 def find_msvc():
-  if sys.platform.startswith('win'):
+  if sys.platform.find('win') != -1:
     default_dir = r'C:\Program Files (x86)\Microsoft Visual Studio'
     for release in ['2019', '2017']:
       for version in ['Enterprise', 'Professional', 'Community', 'BuildTools']:
