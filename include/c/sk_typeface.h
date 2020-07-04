@@ -41,6 +41,7 @@ SK_C_API bool sk_typeface_get_kerning_pair_adjustments(const sk_typeface_t* type
 // TODO: createFamilyNameIterator
 SK_C_API sk_string_t* sk_typeface_get_family_name(const sk_typeface_t* typeface);
 SK_C_API sk_stream_asset_t* sk_typeface_open_stream(const sk_typeface_t* typeface, int* ttcIndex);
+SK_C_API uint32_t sk_typeface_get_unique_id(sk_typeface_t* typeface);
 
 
 // font manager

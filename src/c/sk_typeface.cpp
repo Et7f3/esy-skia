@@ -119,6 +119,10 @@ sk_stream_asset_t* sk_typeface_open_stream(const sk_typeface_t* typeface, int* t
     return ToStreamAsset(AsTypeface(typeface)->openStream(ttcIndex).release());
 }
 
+uint32_t sk_typeface_get_unique_id(sk_typeface_t* typeface) {
+    return AsTypeface(typeface)->uniqueID();
+}
+
 
 // font manager
 
